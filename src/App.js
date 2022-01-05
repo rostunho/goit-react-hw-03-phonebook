@@ -18,6 +18,23 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const storageContacts = localStorage.getItem('contacts');
+    const savedContacts = JSON.parse(storageContacts);
+
+    console.log(savedContacts);
+
+    if (savedContacts) {
+      this.setState({ contacts: savedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   handleFilter = event => {
     const { value } = event.target;
 
