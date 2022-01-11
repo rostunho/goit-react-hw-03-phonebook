@@ -44,11 +44,11 @@ class App extends Component {
   createNewContact = newContact => {
     const { contacts } = this.state;
     const unUniqueContact = contacts.some(
-      contact => contact.name === newContact.name,
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase(),
     );
 
     unUniqueContact
-      ? toast.error(`${newContact.name} is already in contacts`)
+      ? toast.error(`"${newContact.name}" is already in contacts`)
       : this.setState(prevState => ({
           contacts: [newContact, ...prevState.contacts],
         }));
